@@ -4,8 +4,8 @@ export const heroCopy =
 
 export const stats = [
   { to: 4, suffix: "+", label: "Years of experience" },
-  { to: 9, suffix: "+", label: "Client projects" },
-  { to: 6, suffix: "", label: "Apps & sites live" },
+  { to: 10, suffix: "+", label: "Client projects" },
+  { to: 8, suffix: "+", label: "Apps & sites live" },
 ];
 
 export const process = [

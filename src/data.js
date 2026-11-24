@@ -47,7 +47,7 @@ export const experience = [
       "Built web and mobile applications on the MERN stack, handling everything from database schema design to UI implementation.",
       "Built cross-platform apps with React Native — navigation, state management and API integrations for responsive UX.",
       "Designed REST APIs with Node.js and Express, handling authentication, validation and core business logic.",
-      "Delivered 9+ client projects across e-commerce, healthcare, education and service-booking domains under tight timelines.",
+      "Delivered 10+ client projects across e-commerce, healthcare, education and service-booking domains under tight timelines.",
       "Used Git and VS Code to keep code clean and support collaborative workflows.",
     ],
   },
