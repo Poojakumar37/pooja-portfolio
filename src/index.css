@@ -390,7 +390,6 @@ body { font-size: 17px; }
 
 .card-link { display: block; height: 100%; color: inherit; }
 
-/* store tags sit on the image, bottom-left, like before */
 .card-badges {
   position: absolute;
   left: 14px;
