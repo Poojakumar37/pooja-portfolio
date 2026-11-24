@@ -5,30 +5,41 @@ export default function Contact() {
   return (
     <>
       <section id="contact" className="contact">
-        <div className="wrap">
-          <Reveal as="h2" className="section-title">
-            Get in touch
+        <div className="wrap contact-grid">
+          <Reveal as="div">
+            <h2 className="big">
+              Let's work
+              <br />
+              together.
+            </h2>
+            <p className="contact-text">
+              I'm open to full stack and React Native roles. Email is quickest, and I'm happy to walk
+              you through any of the projects above.
+            </p>
           </Reveal>
-          <Reveal as="p" className="lede" delay={60}>
-            Open to full stack and React Native roles. The fastest way to reach me is email or
-            LinkedIn — happy to walk through any of the projects above in more detail.
-          </Reveal>
-          <Reveal as="div" className="contact-grid" delay={120}>
-            <a className="btn btn-primary" href={`mailto:${profile.email}`}>
+          <Reveal as="div" className="contact-list" delay={120}>
+            <a href={`mailto:${profile.email}`}>
+              <span>Email</span>
               {profile.email}
             </a>
-            <a className="btn btn-ghost" href={`tel:${profile.phone.replace(/\s/g, "")}`}>
+            <a href={`tel:${profile.phone.replace(/\s/g, "")}`}>
+              <span>Phone</span>
               {profile.phone}
             </a>
-            <a className="btn btn-ghost" href={profile.linkedin} target="_blank" rel="noreferrer">
-              LinkedIn profile
+            <a href={profile.linkedin} target="_blank" rel="noreferrer">
+              <span>LinkedIn</span>
+              pooja-m-s
             </a>
+            <p>
+              <span>Based in</span>
+              {profile.location}
+            </p>
           </Reveal>
         </div>
       </section>
       <footer>
-        <div className="wrap" style={{ display: "flex", justifyContent: "space-between", width: "100%", flexWrap: "wrap", gap: 8 }}>
-          <span>{profile.name} — {profile.location}</span>
+        <div className="wrap foot">
+          <span>© {new Date().getFullYear()} Pooja</span>
           <span>Built with React &amp; Vite</span>
         </div>
       </footer>

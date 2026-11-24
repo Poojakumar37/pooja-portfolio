@@ -1,89 +1,110 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { profile } from "../data.js";
+import { heroCopy, stats, marquee } from "../extra.js";
 
-const lines = [
-  <>
-    <span className="k">const</span> developer = {"{"}
-  </>,
-  <>
-    {"  "}name: <span className="s">"{profile.name}"</span>,
-  </>,
-  <>
-    {"  "}role: <span className="s">"{profile.role}"</span>,
-  </>,
-  <>
-    {"  "}stack: [<span className="s">"React"</span>, <span className="s">"Node.js"</span>,{" "}
-    <span className="s">"React Native"</span>],
-  </>,
-  <>
-    {"  "}location: <span className="s">"{profile.location}"</span>,
-  </>,
-  <>
-    {"  "}
-    <span className="p">shipsFeatures</span>: () {"=>"} <span className="k">true</span>,
-  </>,
-  <>{"}"};</>,
-];
+function CountUp({ to, suffix }) {
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    let raf;
+    const start = performance.now() + 900;
+    const tick = (t) => {
+      const p = Math.min(Math.max((t - start) / 1400, 0), 1);
+      setN(Math.round(to * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [to]);
+  return (
+    <>
+      {n}
+      {suffix}
+    </>
+  );
+}
 
 export default function Hero() {
-  const [count, setCount] = useState(0);
+  const [photoOk, setPhotoOk] = useState(true);
+  const root = useRef(null);
 
+  // subtle pointer parallax on the portrait + big word
   useEffect(() => {
-    if (count >= lines.length) return;
-    const t = setTimeout(() => setCount((c) => c + 1), count === 0 ? 260 : 110);
-    return () => clearTimeout(t);
-  }, [count]);
+    const el = root.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const move = (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      el.style.setProperty("--px", x.toFixed(3));
+      el.style.setProperty("--py", y.toFixed(3));
+    };
+    window.addEventListener("pointermove", move);
+    return () => window.removeEventListener("pointermove", move);
+  }, []);
 
   return (
-    <section className="hero" id="top">
-      <div className="hero-bg" aria-hidden="true" />
+    <section className="hero" id="top" ref={root}>
+      <div className="hero-word" aria-hidden="true">
+        <span>PORT</span>
+        <span>FOLIO</span>
+      </div>
+
       <div className="wrap hero-grid">
-        <div>
-          <p className="kicker">Full stack developer / Bangalore</p>
+        <div className="hero-copy">
+          <p className="hello">Hello, I'm</p>
           <h1>
-            Builds mobile &amp; web
-            <br />
-            products that <em>ship</em>.
+            <span>Pooja</span>
           </h1>
-          <p className="lede">{profile.summary}</p>
-          <div className="hero-tags">
-            {profile.tags.map((t) => (
-              <span className="pill" key={t}>
-                {t}
+          <p className="hero-role">Full stack developer, React Native &amp; MERN</p>
+          <p className="hero-text">
+            {heroCopy.split(" ").map((w, i) => (
+              <span className="w" style={{ "--n": i }} key={i}>
+                {w}&nbsp;
               </span>
             ))}
-          </div>
+          </p>
           <div className="hero-actions">
-            <a className="btn btn-primary" href="#projects">
-              View projects
+            <a className="btn btn-red" href="#projects">
+              See my work
             </a>
-            <a className="btn btn-ghost" href={profile.linkedin} target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            <a className="btn btn-ghost" href={`mailto:${profile.email}`}>
-              Email me
+            <a className="btn btn-line" href={`mailto:${profile.email}`}>
+              Say hi
             </a>
           </div>
         </div>
 
-        <div className="code-panel" aria-hidden="true">
-          <div className="code-head">
-            <span className="code-dot" />
-            <span className="code-dot" />
-            <span className="code-dot" />
-            <span style={{ marginLeft: 6 }}>developer.js</span>
-          </div>
-          <pre className="code-body">
-            {lines.slice(0, count).map((line, i) => (
-              <div key={i}>{line}</div>
-            ))}
-            {count >= lines.length && (
-              <div className="code-comment">
-                <span className="c">// currently building at Moshi Moshi Media</span>
-              </div>
-            )}
-            <span className={`cursor ${count >= lines.length ? "cursor-idle" : ""}`} />
-          </pre>
+        <div className="portrait">
+          {photoOk ? (
+            <img src="/pooja.png" alt="Pooja" onError={() => setPhotoOk(false)} />
+          ) : (
+            <div className="portrait-fallback" aria-label="Portrait placeholder">
+              <span>P</span>
+              <small>Drop your photo at public/pooja.png</small>
+            </div>
+          )}
+        </div>
+
+        <dl className="stats">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <dt>
+                <CountUp to={s.to} suffix={s.suffix} />
+              </dt>
+              <dd>{s.label}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      <div className="marquee" aria-hidden="true">
+        <div className="marquee-track">
+          {[...marquee, ...marquee].map((m, i) => (
+            <span key={i}>{m}</span>
+          ))}
+        </div>
+        <div className="marquee-track rev">
+          {[...marquee].reverse().concat([...marquee].reverse()).map((m, i) => (
+            <span key={i}>{m}</span>
+          ))}
         </div>
       </div>
     </section>
