@@ -2,6 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { profile } from "../data.js";
 import { heroCopy, stats, marquee } from "../extra.js";
 
+// Bundled by Vite, so it works in dev, preview and build.
+// Put your photo at  src/assets/pooja.png  (.jpg / .webp also work).
+const photoFiles = import.meta.glob("../assets/pooja.{png,jpg,jpeg,webp}", {
+  eager: true,
+  import: "default",
+});
+const photo = Object.values(photoFiles)[0];
+
 function CountUp({ to, suffix }) {
   const [n, setN] = useState(0);
   useEffect(() => {
@@ -24,8 +32,7 @@ function CountUp({ to, suffix }) {
 }
 
 export default function Hero() {
-  const [photoOk, setPhotoOk] = useState(true);
-  const root = useRef(null);
+    const root = useRef(null);
 
   // subtle pointer parallax on the portrait + big word
   useEffect(() => {
@@ -73,12 +80,12 @@ export default function Hero() {
         </div>
 
         <div className="portrait">
-          {photoOk ? (
-            <img src="/pooja.png" alt="Pooja" onError={() => setPhotoOk(false)} />
+          {photo ? (
+            <img src={photo} alt="Pooja" />
           ) : (
             <div className="portrait-fallback" aria-label="Portrait placeholder">
               <span>P</span>
-              <small>Drop your photo at public/pooja.png</small>
+              <small>Add your photo at src/assets/pooja.png</small>
             </div>
           )}
         </div>

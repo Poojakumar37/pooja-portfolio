@@ -11,7 +11,7 @@
   --display: "Anton", "Impact", sans-serif;
   --script: "Caveat", cursive;
   --body: "DM Sans", "Segoe UI", sans-serif;
-  --max: 1180px;
+  --max: 1480px;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -21,7 +21,7 @@ body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--
 a { color: inherit; }
 ::selection { background: var(--red); color: #fff; }
 :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
-.wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px); }
 section { padding: 96px 0; border-bottom: 1px solid var(--line); }
 h2 { font-family: var(--display); font-weight: 400; font-size: clamp(26px, 3.4vw, 36px); letter-spacing: 0.02em; text-transform: uppercase; margin: 0 0 28px; }
 
@@ -66,7 +66,7 @@ h2 { font-family: var(--display); font-weight: 400; font-size: clamp(26px, 3.4vw
 .btn-line { border-color: var(--line); }
 .btn-line:hover { border-color: var(--red); }
 
-.portrait { align-self: end; display: flex; justify-content: center; animation: up 1s .7s both; transform: translate(calc(var(--px) * 8px), calc(var(--py) * 5px)); }
+.portrait { align-self: end; display: flex; justify-content: center; animation: up 1s .7s both; transform: translate(calc(var(--px) * 8px), calc(var(--py) * 5px));margin-top: 120px; }
 .portrait img { max-height: 560px; width: auto; filter: drop-shadow(0 20px 60px rgba(0,0,0,.6)); }
 .portrait-fallback { width: min(360px, 90%); aspect-ratio: 3/4; border-radius: 14px; border: 1px dashed var(--line); background: linear-gradient(160deg, var(--red-deep), var(--bg2)); display: grid; place-items: center; align-content: center; text-align: center; }
 .portrait-fallback span { font-family: var(--display); font-size: 180px; line-height: 1; }
@@ -352,3 +352,37 @@ h2.big { background: linear-gradient(100deg, #fff 35%, var(--red) 50%, #fff 65%)
   text-shadow: 0 1px 8px rgba(0, 0, 0, .6);
 }
 .card-badge { z-index: 3; }
+
+
+/* ===== Bigger, bolder description text ===== */
+body { font-size: 17px; }
+
+.hero-text,
+.card-desc,
+.job ul,
+.step-text,
+.edu-school,
+.contact-text {
+  color: #ece5e2;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+}
+
+.hero-text    { font-size: 21px; line-height: 1.7; }
+.card-desc    { font-size: 18px; line-height: 1.7; }
+.job ul       { font-size: 18.5px; line-height: 1.75; }
+.step-text    { font-size: 18px; line-height: 1.6; }
+.edu-school   { font-size: 16.5px; }
+.contact-text { font-size: 21px; line-height: 1.7; }
+
+.card-kind    { font-size: 18px; font-weight: 500; }
+.job-company  { font-size: 16.5px; font-weight: 500; }
+.job-period,
+.edu-meta     { font-size: 15px; color: #d6ccc9; font-weight: 500; }
+.job-hint     { font-size: 18px; font-weight: 500; }
+.edu-degree   { font-size: 18px; }
+.card-tags span,
+.chips span   { font-size: 16px; color: #d6ccc9; font-weight: 500; }
+.stats dd     { font-size: 14.5px; color: #d6ccc9; font-weight: 500; }
+.nav-links    { font-size: 15px; }
+.nav-links a  { font-weight: 500; }
