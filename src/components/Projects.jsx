@@ -1,4 +1,5 @@
 import { projects } from "../data.js";
+import { appStoreLinks } from "../extra.js";
 import Reveal from "./Reveal.jsx";
 
 const initials = (n) =>
@@ -54,10 +55,19 @@ export default function Projects() {
         <div className="cards">
           {projects.map((p, i) => (
             <Reveal as="article" className="card" key={p.name} delay={(i % 3) * 90} onMouseMove={tilt} onMouseLeave={untilt}>
-              <a href={p.link} target="_blank" rel="noreferrer" className="card-link">
+              <div className="card-link">
                 <div className="card-art">
                   <Logo name={p.name} />
-                  <span className="card-badge">{p.linkLabel}</span>
+                  <div className="card-badges">
+                    <a href={p.link} target="_blank" rel="noreferrer" className="card-badge">
+                      {p.linkLabel}
+                    </a>
+                    {appStoreLinks[p.name] && (
+                      <a href={appStoreLinks[p.name]} target="_blank" rel="noreferrer" className="card-badge">
+                        App Store
+                      </a>
+                    )}
+                  </div>
                 </div>
                 <div className="card-body">
                   <h3>{p.name}</h3>
@@ -69,7 +79,7 @@ export default function Projects() {
                     ))}
                   </div>
                 </div>
-              </a>
+              </div>
             </Reveal>
           ))}
         </div>

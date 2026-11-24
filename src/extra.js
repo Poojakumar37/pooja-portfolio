@@ -28,3 +28,11 @@ export const logos = {
   "Vizako": "/logos/vizako.png",
   "Water Tanker": "/logos/watertanker.png",
 };
+
+
+export const appStoreLinks = {
+  "Vijayavani": "https://apps.apple.com/in/app/vijayavani/id6752885450",
+  "Let's Kuku": "https://apps.apple.com/in/app/letskuku/id6759715679",
+  "Kesariya": "https://apps.apple.com/in/app/kesariya/id6790288753",
+  "Vizako": "https://apps.apple.com/in/app/vizako/id6790288754",
+};

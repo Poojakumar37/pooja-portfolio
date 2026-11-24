@@ -386,3 +386,29 @@ body { font-size: 17px; }
 .stats dd     { font-size: 14.5px; color: #d6ccc9; font-weight: 500; }
 .nav-links    { font-size: 15px; }
 .nav-links a  { font-weight: 500; }
+
+
+.card-link { display: block; height: 100%; color: inherit; }
+
+/* store tags sit on the image, bottom-left, like before */
+.card-badges {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+}
+.card-badges .card-badge {
+  position: static;          /* cancel the old absolute positioning */
+  display: inline-block;
+  font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(0, 0, 0, .55);
+  padding: 4px 12px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+  transition: background .2s, transform .2s;
+}
+.card-badges .card-badge:hover { background: var(--red); transform: translateY(-2px); }
